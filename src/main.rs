@@ -123,9 +123,11 @@ impl SpawnExec {
                 hasher.update(env.name.as_bytes());
                 hasher.update(env.value.as_bytes());
             }
-            for prop in self.platform.properties.iter() {
-                hasher.update(prop.name.as_bytes());
-                hasher.update(prop.value.as_bytes());
+            if let Some(ref platform) = self.platform {
+                for prop in platform.properties.iter() {
+                    hasher.update(prop.name.as_bytes());
+                    hasher.update(prop.value.as_bytes());
+                }
             }
             for input in self.inputs.iter() {
                 hasher.update(input.path.as_bytes());

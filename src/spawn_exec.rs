@@ -26,7 +26,7 @@ pub struct Platform {
 pub struct SpawnExec {
     pub command_args: Vec<String>,
     pub environment_variables: Vec<EnvironmentVariable>,
-    pub platform: Platform,
+    pub platform: Option<Platform>,
     pub inputs: Vec<File>,
     pub listed_outputs: Vec<String>,
     pub remotable: bool,
