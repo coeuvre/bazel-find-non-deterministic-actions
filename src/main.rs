@@ -19,7 +19,7 @@ use spawn_exec::SpawnExec;
 #[command(version, about, long_about = None, rename_all="snake_case")]
 struct Args {
     #[arg(short, long)]
-    execution_logs: Vec<PathBuf>,
+    execution_log_json_file: Vec<PathBuf>,
 }
 
 fn spawn_exec_iter(path: &Path) -> Result<impl Iterator<Item = Result<SpawnExec>>> {
@@ -143,7 +143,7 @@ fn main() -> Result<()> {
     let mut digest_to_spawn: HashMap<Sha256, SpawnExec> = HashMap::new();
     let mut non_deterministics_spawns: HashMap<Sha256, [SpawnExec; 2]> = HashMap::new();
 
-    for execution_log in args.execution_logs.iter() {
+    for execution_log in args.execution_log_json_file.iter() {
         for spawn_exec in spawn_exec_iter(&execution_log)? {
             let spawn_exec = spawn_exec?;
 
